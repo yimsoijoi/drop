@@ -1,0 +1,26 @@
+version: '3.9'
+
+services:
+  drop:
+    build:
+      context: .. # Use root of monorepo as a context directory
+      dockerfile: services/notification/notification_service/build/docker/Dockerfile
+      target: development
+    container_name: notification-notification-service-svc
+    command: air -c /go/src/drop/.air.toml -d
+    working_dir: /go/src/drop
+    volumes:
+      - /go/pkg/mod # to cache go module
+      - ./../go.mod:/go/src/drop/go.mod # Use `go.mod` from project root
+      - ./../go.sum:/go/src/drop/go.sum # Use `go.sum` from project root
+      - ./../libraries/:/go/src/drop/libraries # Use libraries from main `libraries` folder
+      - ./../services/notification/notification_service/:/go/src/drop/services/notification/notification_service # Service source code
+    ports:
+      - '8001:8000'
+      - '6543:6379'
+    restart: 'unless-stopped'
+    environment:
+      GIN_PORT: ':8000'
+      AES_KEY: 'ThisIsMySecret'
+      REDIS_PORT: '6379'
+      REDIS_PASSWORD: 'ThisIsMyRedisPassword'
