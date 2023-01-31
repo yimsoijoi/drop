@@ -1,3 +1,3 @@
 #drop
 
-drop allow you to send your text between your device
+drop allow you to send your text between your device via API
