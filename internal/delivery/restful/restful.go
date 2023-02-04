@@ -1,4 +1,4 @@
-package delivery
+package restful
 
 import (
 	"github.com/gin-gonic/gin"

@@ -6,11 +6,12 @@ import (
 )
 
 var (
-	ErrRedisSetText  = errors.New("redis failed to set text")
-	ErrRedisGetText  = errors.New("redis failed to get text")
-	ErrCreateText    = errors.New("failed to create text")
-	ErrGetText       = errors.New("failed to get text")
-	ErrNotFoundInput = errors.New("not found input")
+	ErrRedisSetText      = errors.New("redis failed to set text")
+	ErrRedisGetText      = errors.New("redis failed to get text")
+	ErrUseCaseCreateText = errors.New("usecase failed to create text")
+	ErrUseCaseGetText    = errors.New("usecase failed to get text")
+	ErrNotFoundInput     = errors.New("not found input")
+	ErrRedisNotFound     = errors.New("data not found")
 )
 
 type Error struct {
