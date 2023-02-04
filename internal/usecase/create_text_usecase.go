@@ -16,13 +16,13 @@ func (usecase usecase) CreateText(ctx context.Context, text *string) (code *stri
 		//cipherBlock, err := aes.NewCipher([]byte(viper.GetString(env.AesCipherKey)))
 		cipherBlock, err := aes.NewCipher([]byte("ThisIsMySecret16ThisIsMySecret16"))
 		if err != nil {
-			return nil, errorLibrary.NewError(errorLibrary.ErrCreateText.Error(), err)
+			return nil, errorLibrary.NewError(errorLibrary.ErrUseCaseCreateText.Error(), err)
 		}
 		cipherBlock.Encrypt(encryptedText, []byte(encodedText))
 		hexStr := hex.EncodeToString(encryptedText)
 		key := hexStr[0:4]
 		if err := usecase.repo.SetText(ctx, key, *text); err != nil {
-			return nil, errorLibrary.NewError(errorLibrary.ErrCreateText.Error(), err)
+			return nil, errorLibrary.NewError(errorLibrary.ErrUseCaseCreateText.Error(), err)
 		}
 		return &key, nil
 	}
